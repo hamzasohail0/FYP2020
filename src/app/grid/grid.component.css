@@ -1,0 +1,18 @@
+mat-grid-tile
+{
+    background-color:white;
+}
+.grid-container
+{
+    margin: 22px;
+}
+.dashboard-card {  
+    position: absolute;  
+    top: 15px;  
+    left: 15px;  
+    right: 15px;  
+    bottom: 15px;  
+  } 
+  .dashboard-card-content {  
+    text-align: center;  
+  }
