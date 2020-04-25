@@ -1,18 +1,23 @@
-mat-grid-tile
-{
-    background-color:white;
-}
+
 .grid-container
 {
-    margin: 22px;
+    margin: 20px;
+    background-color: whitesmoke;
+    
+   
 }
 .dashboard-card {  
-    position: absolute;  
-    top: 15px;  
-    left: 15px;  
-    right: 15px;  
-    bottom: 15px;  
+    position:absolute;  
+    top: 20px;  
+    left: 20px;  
+    right: 20px; 
+    padding: 0px;
+    border: solid;
+  
   } 
-  .dashboard-card-content {  
-    text-align: center;  
+  .chart-wrapper
+  { 
+    background-color:white;
+    border: solid;
+    
   }

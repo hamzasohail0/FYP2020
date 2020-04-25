@@ -1,43 +1,50 @@
-<!-- 
-<mat-grid-list cols="2" rowHeight="300px" gutterSize = "10px">
-    <mat-grid-tile>  
-        <mat-card>
-            Sesnor 1
-        
-        </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile> 
-     <mat-card>
-            Sensor 2
-    </mat-card> 
-   </mat-grid-tile>
-
-    <mat-grid-tile> 
-        <mat-card>
-          Sensor 3
-        </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile> 
-        <mat-card>
-            Sensor 4
-        </mat-card>
-    </mat-grid-tile>
-
-</mat-grid-list>
- -->
- 
 <div class="grid-container">   
-  <mat-grid-list cols="2" rowHeight="350px" gutterSize = "20px">  
-    <mat-grid-tile *ngFor="let card of cards" [colspan]="card.cols" [rowspan]="card.rows">  
-      <mat-card class="dashboard-card">  
-          <mat-card-title>  
-            {{card.title}}  
-          </mat-card-title>  
-         
-        <mat-card-content class="dashboard-card-content">  
-          <div>Card Content Here</div>  
+  <mat-grid-list cols="2" rowHeight="370px" gutterSize = "10px">  
+
+     <mat-grid-tile>                                                       
+      <mat-card class="dashboard-card"  >    
+         <mat-card-content class="dashboard-card-content">  
+          <div class="chart-wrapper">
+            <canvas id = "lineChart"></canvas>
+        </div>   
         </mat-card-content>  
-      </mat-card>  
+      </mat-card>   
     </mat-grid-tile>  
-  </mat-grid-list>  
+
+    <mat-grid-tile>                                                       
+      <mat-card class="dashboard-card"  >    
+         <mat-card-content class="dashboard-card-content">  
+          <div class="chart-wrapper">
+            <canvas id = "pieChart"></canvas>
+        </div>   
+        </mat-card-content>  
+      </mat-card>   
+    </mat-grid-tile>
+
+    <mat-grid-tile>                                                       
+      <mat-card class="dashboard-card"  >    
+         <mat-card-content class="dashboard-card-content">  
+          <div class="chart-wrapper">
+            <canvas id = "barChart"></canvas>
+        </div>   
+        </mat-card-content>  
+      </mat-card>   
+    </mat-grid-tile>
+    <mat-grid-tile>                                                       
+      <mat-card class="dashboard-card"  >    
+         <mat-card-content class="dashboard-card-content">  
+          <div class="chart-wrapper">
+            <canvas id = "lineChart2"></canvas>
+        </div>   
+        </mat-card-content>  
+      </mat-card>   
+    </mat-grid-tile>
+
+  </mat-grid-list>                                                             
 </div>
+
+
+      
+  
+
+
