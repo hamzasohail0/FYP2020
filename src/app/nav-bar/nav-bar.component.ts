@@ -12,9 +12,14 @@ export class NavBarComponent implements OnInit {
  
 
   constructor(private router : Router) { }
-//   GotoLiveFeed() {
-//     this.router.navigate(['/livefeed']);  
+   btnClick() {
+     this.router.navigate(['/livefeed']);  
+ }
+   
+//     gotoGrid() {
+//     this.router.navigate(['/grid1']);  
 // }
+
 
   ngOnInit(): void {
     
