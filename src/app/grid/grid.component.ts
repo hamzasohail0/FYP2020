@@ -33,6 +33,7 @@ import { time } from 'console';
     CO = [];
     Smoke = [];
     Humidity = [];
+    F = [];
 
     
     constructor(private testservice : TestService) {}
@@ -41,10 +42,10 @@ import { time } from 'console';
 
     ngOnInit(): void 
     {
-        this.drawLineChart();
-        this.Gas();
-        this.MyDust();
-        this.Flame();
+      this.drawLineChart();
+      this.Gas();
+      this.MyDust();
+      this.Flame();
 
 
     }
