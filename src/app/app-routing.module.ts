@@ -6,7 +6,7 @@ import { GridComponent } from './grid/grid.component';
 
 
 const routes: Routes = [
-  {path:'', component:GridComponent},
+    {path:'', component: GridComponent},
   {path : 'live-feed' , component: LiveFeedComponent }
   
 
