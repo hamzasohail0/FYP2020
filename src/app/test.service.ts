@@ -11,10 +11,9 @@ export class TestService {
 
   constructor(public fireservices : AngularFireDatabase) { }
 
-  getTemerature()
-{
-  return this.fireservices.list('DHT22/Temperature').snapshotChanges();
-}
+  getTemperatureData() {
+    return this.fireservices.list('DHT22/Temperature').snapshotChanges();
+  }
 
 getHumidity()
 {

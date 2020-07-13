@@ -22,7 +22,11 @@ import { time } from 'console';
 
 
   export class GridComponent implements OnInit 
-{   getTempSubs: Subscription; 
+
+
+  {   
+      getTempSubs: Subscription; 
+
     LineChart=[];
     LineChart3=[];
     LineChart4=[];
@@ -34,26 +38,26 @@ import { time } from 'console';
     Smoke = [];
     Humidity = [];
     F = [];
+    temperatureSubscription: Subscription;
 
-    
-    constructor(private testservice : TestService) {}
+    constructor(public testservice : TestService) {}
 
-
-
-    ngOnInit(): void 
-    {
-      this.drawLineChart();
+    ngOnInit(): void {
+      this.drawTemperatureAndHumidityGraph();
       this.Gas();
       this.MyDust();
       this.Flame();
 
-
     }
 
     
-    Flame() 
-    {
+  Flame() 
+    { 
+
+        
+        
         // var jsonfile1= {
+            
         //     "DUSTTT" :[
         //         {
         //            "Labels" : "12:00pm",
@@ -292,12 +296,9 @@ import { time } from 'console';
 setInterval (update_data4,6000);
 
         
-}
+  }
 
-
-
-    MyDust() {
-
+  MyDust() {
         var jsonfile1= {
             "DUSTTT" :[
                 {
@@ -460,9 +461,7 @@ setInterval (update_data4,6000);
                      "data" : 195
                         
                  },
-
-                 
-                 
+     
             ]
             
         }
@@ -478,22 +477,20 @@ setInterval (update_data4,6000);
 
          let LineChart2 = new Chart('lineChart2', {
             type: 'line',
-          data: {
-           labels:[time]  ,
-           datasets: [{
-               label: 'Dust',
-               data: [50,3,53,2,4,5],
-      
-               fill:false,
-               lineTension:0.5,
-               pointBackgroundColor:'#2CC2A5',
-               borderColor:"#2CC2A5",
-               borderWidth: 1
-           }]
+            data: {
+              labels:[time]  ,
+              datasets: [{
+                  label: 'Dust',
+                  data: [50,3,53,2,4,5],
+          
+                  fill:false,
+                  lineTension:0.5,
+                  pointBackgroundColor:'#2CC2A5',
+                  borderColor:"#2CC2A5",
+                  borderWidth: 1
+              }]
           }, 
           options: {
-            
-            
            title:{
                text:"Dust Sensor",
                display:true
@@ -505,8 +502,7 @@ setInterval (update_data4,6000);
                    }
                }]
               },
-               animation:
-               {
+               animation: {
                  duration:5000,
                  easing:'linear'
                 
@@ -519,14 +515,11 @@ setInterval (update_data4,6000);
                 var time = today.getHours() + ":" +  today.getMinutes() + ":" + today.getSeconds();
                 LineChart2.data.labels.push(time)
                 LineChart2.update();
+              }
+    setInterval (update_data3,6000);
+  }
 
-}
-setInterval (update_data3,6000);
-
-          
-        
-    }
-    Gas() {
+  Gas() {
         this.getTempSubs = this.testservice.getLPG().subscribe (data => {
             console.log (data.map(item => {return {"data" : item.payload.toJSON()}}));
             this.LPG = data.map (item => {return {"data" : item.payload.toJSON()}});
@@ -765,11 +758,11 @@ setInterval (update_data,6000);
 
 
         
-    }
+  }
     
-    drawLineChart() {
-
-        var jsonfile= {
+  drawTemperatureAndHumidityGraph() {
+      // Dummy Data
+      var jsonfile = {
             "Tempeature" :[ 
                 {
                    "Labels" : "12:00pm",
@@ -848,7 +841,7 @@ setInterval (update_data,6000);
                         
                  },
                  {
-                    "Labels" : "12:15pm",
+                    "Labels" : "12:15pm ",
                      "data" : 1
                         
                  },
@@ -874,113 +867,96 @@ setInterval (update_data,6000);
                  },
             ]
             
-        }
-        var labels1 = jsonfile.Tempeature.map(function(e) {
+      }
+      var labels1 = jsonfile.Tempeature.map(function(e) {
             return e.Labels;
-         });
+      });
       
-         var DATA = jsonfile.Tempeature.map(function(e) {
+      var DATA = jsonfile.Tempeature.map(function(e) {
             return e.data;
-         });;
-         
-         var today = new Date ();
-         var time = today.getHours() + ":" +  today.getMinutes() + ":" + today.getSeconds();
-
-         let LineChart = new Chart('lineChart', {
-
-          
-            type: 'line',
-          data: {
-          labels: [time],
-           datasets: [{
-
-               label: 'Temp',
-               data:  [1,2,3,4,5,6,7,8],
+      });;
       
-               fill:false,
-               lineTension:1,
-               borderColor:"pink",
-               borderWidth: 2,
-               pointBackgroundColor:'red',
-               pointHoverBackgroundColor: 'red',
-               cubicInterpolationMode: "monotone",
-              
-               
-           },
+      // Fetching Date
+      var today = new Date ();
+      var time = today.getHours() + ":" +  today.getMinutes() + ":" + today.getSeconds();
+      // variable for temperature data
+      let temperatureValues = [];
+
+ 
+      // Subscribing to Database slice
+      this.temperatureSubscription = this.testservice.getTemperatureData().subscribe(
+        (databaseSlice) => {
+          temperatureValues = databaseSlice.map(item =>{return item.payload.toJSON()});
+          // Remove unit and convert to integer
+          temperatureValues = temperatureValues.map(stringEntry => +stringEntry.replace('°C',''));
+          console.log('temperature slice after mapping: ', temperatureValues)
+        }
+      );
 
 
-             {
+    // function update_data2 (chart,label,data) {
+    //   var today = new Date ();
+    //   var time = today.getHours() + ":" +  today.getMinutes() + ":" + today.getSeconds();
+    //   LineChart.data.labels.push(time)
+    //   LineChart.update();}
+    // setInterval (update_data2,6000);    
+    // }
+}
 
-              label : "Humidity",
-               data : [200,34000,3],
-               fill:false,
-               lineTension:1,
-               borderColor:"#8C54FF",
-               borderWidth: 2,
-               pointBackgroundColor:'#8C54FF',
-               pointHoverBackgroundColor: '#8C54FF',
-               cubicInterpolationMode: "monotone",
-               
-           }
-        ]
-          }, 
-          options: {
-              
-              responsive : true,
-            
-            
-           title:{
-               text:"Temperature Sensor",
-               display:true
-           },
-           scales: {
-               yAxes: [{
-                scaleLabel: {
-                    display: true,
-                    
-                },
-                
-                   ticks: {
-                       beginAtZero:true
-                   }
-               }]
-              },
-
-               animation:
-               {
-                 duration:5000,
-                 easing:'linear',
-              
-      
+renderTemperatureAndHumidityGraph(temperatureValues) {
+  let LineChart = new Chart('lineChart', {
+    type: 'line',
+    data: {
+    labels: ["time1"],
+    datasets: [
+      {
+      label: 'Temp',
+      data:  temperatureValues,
+      fill:false,
+      lineTension:1,
+      borderColor:"pink",
+      borderWidth: 2,
+      pointBackgroundColor:'red',
+      pointHoverBackgroundColor: 'red',
+      cubicInterpolationMode: "monotone",
+       },
+      {
+      label : "Humidity",
+      data : [200,34000,3],
+      fill:false,
+      lineTension:1,
+      borderColor:"#8C54FF",
+      borderWidth: 2,
+      pointBackgroundColor:'#8C54FF',
+      pointHoverBackgroundColor: '#8C54FF',
+      cubicInterpolationMode: "monotone", 
+      }
+    ]
+    }, 
+      options: {      
+        responsive : true,
+       title:{
+        text:"Temperature Sensor",
+        display:true
+       },
+       scales: {
+           yAxes: [{
+            scaleLabel: {
+                display: true,        
+            },
+               ticks: {
+                   beginAtZero:true
                }
-               
+           }]
+          },
+           animation:
+           {
+             duration:5000,
+             easing:'linear',
            }
-          
-          });
-
-          function update_data2 (chart,label,data)
-              {
-                var today = new Date ();
-                var time = today.getHours() + ":" +  today.getMinutes() + ":" + today.getSeconds();
-                LineChart.data.labels.push(time)
-                LineChart.update();
-
+       }
+  });
 }
-setInterval (update_data2,6000);
-
-          
-
-        
-    }
-
-    
-
-}
-
-
-
-
-
-
 
    
+}
