@@ -180,9 +180,9 @@ export class GridComponent implements OnInit {
         console.log('Subscription hit:', this.temperatureValuesFromDB);
 
         // Redraw graph
-        var labels1 = this.temperatureDummyData.Tempeature.map(function(e) {
-          return e.Labels;
-          });
+        // var labels1 = this.temperatureDummyData.Tempeature.map(function(e) {
+        //   return e.Labels;
+        //   });
         console.log('labels1', this.temperatureTimestamps)
         this.temperatureAndHumidityLineChart = new Chart('lineChart', {
           type: 'line',
@@ -231,7 +231,7 @@ export class GridComponent implements OnInit {
               },
               animation:
               {
-                duration:1000,
+                duration:3000,
                 easing:'linear',
               }
             }
@@ -378,7 +378,7 @@ export class GridComponent implements OnInit {
           data.splice (0, (data.length - 10));
   
           //
-          this.Dust_Values = data.map (item => +item.payload.toJSON().toString().replace ('mV' , ''));
+          this.Dust_Values = data.map (item => +item.payload.toJSON().toString().replace ('ug/m^3' , ''));
           this.Dust_TimeStamps  = data.map ( data => {
             let today = new Date();
             let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -475,32 +475,32 @@ export class GridComponent implements OnInit {
                     data:  this.CO_Values,
                     fill:false,
                     lineTension:1,
-                    borderColor:"#2E5BFF",
+                    borderColor:"#2CC2A5",
                     borderWidth: 1,
-                    pointBackgroundColor:'#2E5BFF',
-                    pointHoverBackgroundColor: '#2E5BFF',
+                    pointBackgroundColor:'#2CC2A5',
+                    pointHoverBackgroundColor: '#2CC2A5',
                     cubicInterpolationMode: "monotone",
                   },
                   {
                     label: 'LPG',
                     data:  this.LPG_Values,
                     fill:false,
-                    lineTension:1,
-                    borderColor:"pink",
+                    lineTension:2,
+                    borderColor:"	#778899",
                     borderWidth: 1,
-                    pointBackgroundColor:'pink',
-                    pointHoverBackgroundColor: 'pink',
+                    pointBackgroundColor:"	#778899",
+                    pointHoverBackgroundColor: '	#778899',
                     cubicInterpolationMode: "monotone",
                   },
                   {
                     label: 'Smoke',
                     data:  this.Smoke_Values,
                     fill:false,
-                    lineTension:1,
-                    borderColor:"green",
-                    borderWidth: 1,
-                    pointBackgroundColor:'green',
-                    pointHoverBackgroundColor: 'green',
+                    lineTension:2,
+                    borderColor:"#6A5ACD",
+                    borderWidth: 2,
+                    pointBackgroundColor:'#6A5ACD',
+                    pointHoverBackgroundColor: '#6A5ACD',
                     cubicInterpolationMode: "monotone",
                   },
                   
@@ -563,33 +563,33 @@ export class GridComponent implements OnInit {
                     label: 'CO',
                     data:  this.CO_Values,
                     fill:false,
-                    lineTension:1,
-                    borderColor:"#2E5BFF",
+                    lineTension:2,
+                    borderColor:"#2CC2A5",
                     borderWidth: 1,
-                    pointBackgroundColor:'#2E5BFF',
-                    pointHoverBackgroundColor: '#2E5BFF',
+                    pointBackgroundColor:'#2CC2A5',
+                    pointHoverBackgroundColor: '#2CC2A5',
                     cubicInterpolationMode: "monotone",
                   },
                   {
                     label: 'LPG',
                     data:  this.LPG_Values,
                     fill:false,
-                    lineTension:1,
-                    borderColor:"pink",
+                    lineTension:2,
+                    borderColor:"	#778899",
                     borderWidth: 1,
-                    pointBackgroundColor:'pink',
-                    pointHoverBackgroundColor: 'pink',
+                    pointBackgroundColor:'	#778899',
+                    pointHoverBackgroundColor: '	#778899',
                     cubicInterpolationMode: "monotone",
                   },
                   {
                     label: 'Smoke',
                     data:  this.Smoke_Values,
                     fill:false,
-                    lineTension:1,
-                    borderColor:"green",
+                    lineTension:2,
+                    borderColor:"#6A5ACD",
                     borderWidth: 1,
-                    pointBackgroundColor:'green',
-                    pointHoverBackgroundColor: 'green',
+                    pointBackgroundColor:'#6A5ACD',
+                    pointHoverBackgroundColor: '#6A5ACD',
                     cubicInterpolationMode: "monotone",
                   },
                   
@@ -655,7 +655,7 @@ export class GridComponent implements OnInit {
                     label: 'CO',
                     data:  this.CO_Values,
                     fill:false,
-                    lineTension:1,
+                    lineTension:2,
                     borderColor:"#2E5BFF",
                     borderWidth: 1,
                     pointBackgroundColor:'#2E5BFF',
@@ -666,22 +666,22 @@ export class GridComponent implements OnInit {
                     label: 'LPG',
                     data:  this.LPG_Values,
                     fill:false,
-                    lineTension:1,
-                    borderColor:"pink",
+                    lineTension:2,
+                    borderColor:"	#778899",
                     borderWidth: 1,
-                    pointBackgroundColor:'pink',
-                    pointHoverBackgroundColor: 'pink',
+                    pointBackgroundColor:'	#778899',
+                    pointHoverBackgroundColor: '	#778899',
                     cubicInterpolationMode: "monotone",
                   },
                   {
                     label: 'Smoke',
                     data:  this.Smoke_Values,
                     fill:false,
-                    lineTension:1,
-                    borderColor:"green",
+                    lineTension:2,
+                    borderColor:"#6A5ACD",
                     borderWidth: 1,
-                    pointBackgroundColor:'green',
-                    pointHoverBackgroundColor: 'green',
+                    pointBackgroundColor:'#6A5ACD',
+                    pointHoverBackgroundColor: '#6A5ACD',
                     cubicInterpolationMode: "monotone",
                   },
                   

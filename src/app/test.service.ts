@@ -23,7 +23,7 @@ getHumidity()
  
 getDust()
 {
-  return this.fireservices.list('Dust/OutVoltage').snapshotChanges();
+  return this.fireservices.list('Dust/Density').snapshotChanges();
 }
 
 getLPG ()
